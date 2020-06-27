@@ -1,6 +1,7 @@
 package com.rohanrele.clrunner;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,38 +27,66 @@ public class DbDataPopulateCLRunner implements CommandLineRunner {
 		// check if country table has any data
 		countriesCount = countryRepository.count();
 
-		// if country table has data break
+		// if country table has no data then populate data
 		if (countriesCount == 0) {
-			// local variables
-			List<Country> countries = new ArrayList<Country>();
-			Country country = null;
-			Province province = null;
-			City city = null;
-			List<Province> provinces = null;
-			List<City> cities = null;
+			// save to db
+			countryRepository.saveAll(populateCountries());
+		} else { // else delete data and then populate data
+			countryRepository.deleteAll();			
+			countryRepository.saveAll(populateCountries());
+		}
+	}
 
-			// populate data
-			country = new Country();
-			country.setName("India");
-			provinces = new ArrayList<Province>();
-			country.setProvinces(provinces);
-			
-			province = new Province();
-			province.setName("Maharashtra");
-			province.setCountry(country);
-			cities = new ArrayList<City>();
-			province.setCities(cities);
-			provinces.add(province);
+	private List<Country> populateCountries() {
+		// local variables
+		List<Country> countries = new ArrayList<Country>();
+		Country country = null;
+		List<Province> provinces = null;
 
+		// populate country 1
+		country = new Country();
+		country.setName("India");
+		provinces = new ArrayList<Province>();
+		provinces.add(populateProvince("Maharashtra", country, Arrays.asList("Mumbai", "Pune")));
+		provinces.add(populateProvince("Karnataka", country, Arrays.asList("Bangalore", "Mangalore")));
+		country.setProvinces(provinces);
+		countries.add(country);
+
+		// populate country 2
+		country = new Country();
+		country.setName("Canada");
+		provinces = new ArrayList<Province>();
+		provinces.add(populateProvince("Ontario", country, Arrays.asList("Toronto", "Ottawa")));
+		provinces.add(populateProvince("British Columbia", country, Arrays.asList("Vancouver", "Victoria")));
+		country.setProvinces(provinces);
+		countries.add(country);
+
+		return countries;
+	}
+
+	private List<City> populateCities(List<String> cityNames, Province province) {
+		// local variables
+		List<City> cities = new ArrayList<City>();
+		City city = null;
+
+		for (String cityName : cityNames) {
 			city = new City();
-			city.setName("Mumbai");
+			city.setName(cityName);
 			city.setProvince(province);
 			cities.add(city);
-
-			// save to db
-			countryRepository.saveAll(countries);
-		} else {
-
 		}
+		return cities;
+	}
+
+	private Province populateProvince(String provinceName, Country country, List<String> cityNames) {
+		// local variables
+		Province province = null;
+
+		province = new Province();
+		province.setName(provinceName);
+		province.setCountry(country);
+		province.setCities(populateCities(cityNames, province));
+
+		return province;
 	}
 }
