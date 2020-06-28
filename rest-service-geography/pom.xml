@@ -12,7 +12,7 @@
 	<groupId>com.rohanrele</groupId>
 	<artifactId>rest-service-geography</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>rest-service-country</name>
+	<name>rest-service-geography</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
