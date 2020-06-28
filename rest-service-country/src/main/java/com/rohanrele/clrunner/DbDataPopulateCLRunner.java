@@ -31,9 +31,8 @@ public class DbDataPopulateCLRunner implements CommandLineRunner {
 		if (countriesCount == 0) {
 			// save to db
 			countryRepository.saveAll(populateCountries());
-		} else { // else delete data and then populate data
-			countryRepository.deleteAll();			
-			countryRepository.saveAll(populateCountries());
+		} else { // else update tuples
+
 		}
 	}
 
@@ -41,24 +40,20 @@ public class DbDataPopulateCLRunner implements CommandLineRunner {
 		// local variables
 		List<Country> countries = new ArrayList<Country>();
 		Country country = null;
-		List<Province> provinces = null;
 
 		// populate country 1
 		country = new Country();
 		country.setName("India");
-		provinces = new ArrayList<Province>();
-		provinces.add(populateProvince("Maharashtra", country, Arrays.asList("Mumbai", "Pune")));
-		provinces.add(populateProvince("Karnataka", country, Arrays.asList("Bangalore", "Mangalore")));
-		country.setProvinces(provinces);
+		country.getProvinces().add(populateProvince("Maharashtra", country, Arrays.asList("Mumbai", "Pune")));
+		country.getProvinces().add(populateProvince("Karnataka", country, Arrays.asList("Bangalore", "Mangalore")));
 		countries.add(country);
 
 		// populate country 2
 		country = new Country();
 		country.setName("Canada");
-		provinces = new ArrayList<Province>();
-		provinces.add(populateProvince("Ontario", country, Arrays.asList("Toronto", "Ottawa")));
-		provinces.add(populateProvince("British Columbia", country, Arrays.asList("Vancouver", "Victoria")));
-		country.setProvinces(provinces);
+		country.getProvinces().add(populateProvince("Ontario", country, Arrays.asList("Toronto", "Ottawa")));
+		country.getProvinces()
+				.add(populateProvince("British Columbia", country, Arrays.asList("Vancouver", "Victoria")));
 		countries.add(country);
 
 		return countries;
