@@ -1,7 +1,7 @@
 package com.rohanrele.bo;
 
 public class CityBO {
-	
+
 	private int id;
 
 	private String name;
