@@ -3,6 +3,7 @@ package com.rohanrele.controller;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +40,7 @@ public class GeographyController {
 		CountryBO countryBO = null;
 		Country country = null;
 
-		// retrieve all countries form database
+		// retrieve all countries from database
 		countiesIterator = countryRepository.findAll().iterator();
 
 		// return countries bo
@@ -61,7 +62,7 @@ public class GeographyController {
 		List<Province> provinces = null;
 		ProvinceBO provinceBO = null;
 
-		// retrieve provinces by country id
+		// retrieve provinces by country id from database
 		provinces = provinceRepository.findByCountryId(countryId);
 
 		// return provinces bo
@@ -82,7 +83,7 @@ public class GeographyController {
 		List<City> cities = null;
 		CityBO cityBO = null;
 
-		// retrieve cities by province id
+		// retrieve cities by province id from database
 		cities = cityRepository.findByProvinceId(provinceId);
 
 		// return provinces bo
@@ -94,5 +95,65 @@ public class GeographyController {
 			cityBOs.add(cityBO);
 		}
 		return cityBOs;
+	}
+
+	@GetMapping(path = "/country/{id}")
+	public CountryBO getCountry(@PathVariable(name = "id") int countryId) {
+		// local variables
+		CountryBO countryBO = null;
+		Optional<Country> optionalCountry = null;
+		Country country = null;
+
+		// get country by country id from database
+		optionalCountry = countryRepository.findById(countryId);
+
+		// return country bo
+		if (optionalCountry.isPresent()) {
+			country = optionalCountry.get();
+			countryBO = new CountryBO();
+			countryBO.setId(country.getId());
+			countryBO.setName(country.getName());
+		}
+		return countryBO;
+	}
+	
+	@GetMapping(path = "/province/{id}")
+	public ProvinceBO getProvince(@PathVariable(name = "id") int provinceId) {
+		// local variables
+		ProvinceBO provinceBO = null;
+		Optional<Province> optionalProvince = null;
+		Province province = null;
+
+		// get province by province id from database
+		optionalProvince = provinceRepository.findById(provinceId);
+
+		// return province bo
+		if (optionalProvince.isPresent()) {
+			province = optionalProvince.get();
+			provinceBO = new ProvinceBO();
+			provinceBO.setId(province.getId());
+			provinceBO.setName(province.getName());
+		}
+		return provinceBO;
+	}
+	
+	@GetMapping(path = "/city/{id}")
+	public CityBO getCity(@PathVariable(name = "id") int cityId) {
+		// local variables
+		CityBO cityBO = null;
+		Optional<City> optionalCity = null;
+		City city = null;
+
+		// get city by city id from database
+		optionalCity = cityRepository.findById(cityId);
+
+		// return city bo
+		if (optionalCity.isPresent()) {
+			city = optionalCity.get();
+			cityBO = new CityBO();
+			cityBO.setId(city.getId());
+			cityBO.setName(city.getName());
+		}
+		return cityBO;
 	}
 }

@@ -3,9 +3,9 @@ package com.rohanrele.dao;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import com.rohanrele.entity.Country;
+import com.rohanrele.entity.Employee;
 
 @Repository
-public interface CountryRepository extends PagingAndSortingRepository<Country, Integer> {
+public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Integer> {
 
 }
