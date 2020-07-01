@@ -1,0 +1,6 @@
+<small *ngIf="!authenticated">{{errorMessage}}</small>
+<br>
+Username: <input type="text" name="username" [(ngModel)]="username">
+Password: <input type="password" name="password" [(ngModel)]="password">
+
+<button (click)="authenticate()">Login</button> 
