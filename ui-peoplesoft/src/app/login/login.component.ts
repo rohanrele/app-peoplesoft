@@ -7,11 +7,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  title = 'LoginComponent Title'
-  username = 'appuser1'
-  password = ''
-  errorMessage = 'Username and/or Password incorrect!'
-  authenticated = true
+  username = 'appuser1';
+  password = 'appuser1password';
+  errorMessage = 'Username and/or Password incorrect!';
+  authenticated = true;
 
   constructor(private router: Router) { }
 

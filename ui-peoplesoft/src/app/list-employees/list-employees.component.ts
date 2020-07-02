@@ -19,7 +19,6 @@ export class Employee {
   styleUrls: ['./list-employees.component.css']
 })
 export class ListEmployeesComponent implements OnInit {
-  title = 'ListEmployeesComponent Title'
   employees = [
     new Employee(
       1,
@@ -39,7 +38,7 @@ export class ListEmployeesComponent implements OnInit {
       'Ontario',
       'Toronto'
     )
-  ]
+  ];
 
   constructor() { }
 

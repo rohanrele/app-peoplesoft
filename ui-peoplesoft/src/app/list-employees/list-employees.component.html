@@ -1,26 +1,28 @@
-<table border="1">
-    <caption>Employee List</caption>
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email Id</th>
-            <th>Country</th>
-            <th>Province</th>
-            <th>City</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let employee of employees">
-            <td>{{employee.id}}</td>
-            <td>{{employee.firstName}}</td>
-            <td>{{employee.lastName}}</td>
-            <td>{{employee.emailId}}</td>
-            <td>{{employee.countryName}}</td>
-            <td>{{employee.provinceName}}</td>
-            <td>{{employee.cityName}}</td>
-        </tr>
-    </tbody>
+<h1>Employees List</h1>
 
-</table>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email Id</th>
+                <th>Country</th>
+                <th>Province</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of employees">
+                <td>{{employee.id}}</td>
+                <td>{{employee.firstName}}</td>
+                <td>{{employee.lastName}}</td>
+                <td>{{employee.emailId}}</td>
+                <td>{{employee.countryName}}</td>
+                <td>{{employee.provinceName}}</td>
+                <td>{{employee.cityName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

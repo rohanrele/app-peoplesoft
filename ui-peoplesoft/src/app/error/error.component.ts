@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit {
-  title = 'ErrorComponent Title'
+  title = 'ErrorComponent Title';
   constructor() { }
 
   ngOnInit(): void {
