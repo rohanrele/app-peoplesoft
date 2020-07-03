@@ -7,11 +7,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
-  username = '';
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.username = this.route.snapshot.params['username'];
   }
-
 }

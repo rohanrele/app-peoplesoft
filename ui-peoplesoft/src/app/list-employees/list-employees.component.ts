@@ -1,17 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-
-export class Employee {
-  constructor(
-    public id: number,
-    public firstName: string,
-    public lastName: string,
-    public emailId: string,
-    public countryName: string,
-    public provinceName: string,
-    public cityName: string) {
-  }
-}
+import { Employee } from '../bo/employee';
 
 @Component({
   selector: 'app-list-employees',
