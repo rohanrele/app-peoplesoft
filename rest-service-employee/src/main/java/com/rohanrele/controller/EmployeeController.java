@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ import com.rohanrele.bo.ProvinceBO;
 import com.rohanrele.dao.EmployeeRepository;
 import com.rohanrele.entity.Employee;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class EmployeeController {
 	@Autowired
