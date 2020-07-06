@@ -7,7 +7,7 @@ export class HardcodedAuthenticationService {
 
   constructor() { }
 
-  authenticate(username, password) {
+  authenticate(username:string, password:string):boolean {
     if ((username === 'appuser1' && password === 'appuser1password') || (username === 'appuser2' && password === 'appuser2password')) {
       sessionStorage.setItem('authenticatedUsername', username);
       return true;
@@ -16,16 +16,16 @@ export class HardcodedAuthenticationService {
     }
   }
 
-  isAuthenticated() {
+  isAuthenticated():boolean {
     let username = sessionStorage.getItem('authenticatedUsername');
     return !(username === null);
   }
 
-  logout() {
+  logout():void {
     sessionStorage.removeItem('authenticatedUsername');
   }
 
-  getAuthenticatedUsername(){
+  getAuthenticatedUsername():string{
     return sessionStorage.getItem('authenticatedUsername');
   }
 }

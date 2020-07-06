@@ -11,6 +11,7 @@
                 <th>Country</th>
                 <th>Province</th>
                 <th>City</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +28,7 @@
                 <td>{{employee.countryName}}</td>
                 <td>{{employee.provinceName}}</td>
                 <td>{{employee.cityName}}</td>
+                <td><button (click)="updateEmployee(employee.id)" class="btn btn-success">Update</button></td>
             </tr>
         </tbody>
     </table>
