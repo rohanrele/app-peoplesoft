@@ -1,7 +1,8 @@
 <h1>Employee Update</h1>
 
-<div class="container" *ngIf="employee != null">
-    <div class="alert alert-warning" *ngIf="errorMessage">{{errorMessage}}</div>
+<div class="alert alert-warning" *ngIf="errorMessage">{{errorMessage}}</div>
+
+<div class="container overflow-auto" *ngIf="employee != null" style="max-height: 500px;">
     <fieldset class="form-group">
         <label>Employee Id</label>
         <input disabled type="text" class="form-control" [(ngModel)]="employee.id">
@@ -18,10 +19,16 @@
         <label>Email Id</label>
         <input type="email" class="form-control" required="required" [(ngModel)]="employee.emailId">
     </fieldset>
-    <fieldset class="form-group">
+    <fieldset class="form-group" *ngIf="countries!= null && countries.length > 0" (change)="getProvincesByCountryId()">
         <label>Country</label>
         <select class="form-control" required="required" [(ngModel)]="employee.countryId">
             <option *ngFor="let country of countries" [value]="country.id" [selected]="employee.countryId == country.id">{{country.name}}</option>
+        </select>
+    </fieldset>
+    <fieldset class="form-group" *ngIf="provinces!= null && provinces.length > 0" (change)="getCitiesByProvinceId()">
+        <label>Province</label>
+        <select class="form-control" required="required" [(ngModel)]="employee.provinceId">
+            <option *ngFor="let province of provinces" [value]="province.id" [selected]="employee.provinceId == province.id">{{province.name}}</option>
         </select>
     </fieldset>
     <button class="btn btn-success" (click)="updateEmployee()">Save</button>

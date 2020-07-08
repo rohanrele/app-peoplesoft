@@ -14,7 +14,7 @@ export class RestEmployeeService {
     return this.httpClient.get<Employee[]>('http://localhost:8081/employee');
   }
 
-  getEmployee(employeeId:string):Observable<Employee>{
+  getEmployee(employeeId:number):Observable<Employee>{
     return this.httpClient.get<Employee>(`http://localhost:8081/employee/${employeeId}`);
   }
 }
