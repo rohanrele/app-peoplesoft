@@ -2,7 +2,7 @@
 
 <div class="alert alert-warning" *ngIf="errorMessage">{{errorMessage}}</div>
 
-<div class="container overflow-auto" *ngIf="employee != null" style="max-height: 500px;">
+<div class="container overflow-auto" *ngIf="employee != null" style="max-height: 450px;">
     <fieldset class="form-group">
         <label>Employee Id</label>
         <input disabled type="text" class="form-control" [(ngModel)]="employee.id">
@@ -19,17 +19,30 @@
         <label>Email Id</label>
         <input type="email" class="form-control" required="required" [(ngModel)]="employee.emailId">
     </fieldset>
-    <fieldset class="form-group" *ngIf="countries!= null && countries.length > 0" (change)="getProvincesByCountryId()">
+    <fieldset class="form-group" (change)="getProvincesByCountryId()">
         <label>Country</label>
-        <select class="form-control" required="required" [(ngModel)]="employee.countryId">
+        <select class="form-control" [(ngModel)]="employee.countryId">
+            <option value="-1" selected>Select Country</option>
             <option *ngFor="let country of countries" [value]="country.id" [selected]="employee.countryId == country.id">{{country.name}}</option>
         </select>
     </fieldset>
-    <fieldset class="form-group" *ngIf="provinces!= null && provinces.length > 0" (change)="getCitiesByProvinceId()">
+    <fieldset class="form-group" (change)="getCitiesByProvinceId()">
         <label>Province</label>
-        <select class="form-control" required="required" [(ngModel)]="employee.provinceId">
+        <select class="form-control" [(ngModel)]="employee.provinceId">
+            <option value="-1" selected>Select Province</option>
             <option *ngFor="let province of provinces" [value]="province.id" [selected]="employee.provinceId == province.id">{{province.name}}</option>
         </select>
     </fieldset>
-    <button class="btn btn-success" (click)="updateEmployee()">Save</button>
+    <fieldset class="form-group">
+        <label>Cities</label>
+        <select class="form-control" [(ngModel)]="employee.cityId">
+            <option value="-1" selected>Select City</option>
+            <option *ngFor="let city of cities" [value]="city.id" [selected]="employee.cityId == city.id">{{city.name}}</option>
+        </select>
+    </fieldset>    </div>
+<br>
+<div class="container">
+    <button (click)="updateEmployee()" class="btn btn-success">Save</button>
 </div>
+
+

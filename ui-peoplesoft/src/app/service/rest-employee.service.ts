@@ -17,4 +17,8 @@ export class RestEmployeeService {
   getEmployee(employeeId:number):Observable<Employee>{
     return this.httpClient.get<Employee>(`http://localhost:8081/employee/${employeeId}`);
   }
+
+  updateEmployee(employeeId:number, employee: Employee):Observable<Employee>{
+    return this.httpClient.put<Employee>(`http://localhost:8081/employee/${employeeId}`, employee);
+  }
 }
