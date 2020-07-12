@@ -9,6 +9,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,6 +38,12 @@ public class EmployeeController {
 
 	@Value("${url.RestServiceGeographyApplication}")
 	String urlRestServiceGeographyApplication;
+
+	@Value("${username.RestServiceGeographyApplication}")
+	String usernameRestServiceGeographyApplication;
+
+	@Value("${password.RestServiceGeographyApplication}")
+	String passwordRestServiceGeographyApplication;
 
 	@PostMapping(path = "/employee")
 	public EmployeeBO createEmployee(@RequestBody EmployeeBO employeeBO) {
@@ -188,30 +199,48 @@ public class EmployeeController {
 	private CountryBO getCountry(int countryId) {
 		// local variables
 		Map<String, Integer> uriVariables = new HashMap<String, Integer>();
+		HttpEntity<String> request = new HttpEntity<String>(getAuthorisationHeaderForBasicAuthentication());
 
 		uriVariables.put("id", countryId);
-		CountryBO countryBO = new RestTemplate().getForObject(urlRestServiceGeographyApplication + "/country/{id}",
-				CountryBO.class, uriVariables);
+		ResponseEntity<CountryBO> response = new RestTemplate().exchange(
+				urlRestServiceGeographyApplication + "/country/{id}", HttpMethod.GET, request, CountryBO.class,
+				uriVariables);
+		CountryBO countryBO = response.getBody();
 		return countryBO;
 	}
 
 	private ProvinceBO getProvince(int provinceId) {
 		// local variables
 		Map<String, Integer> uriVariables = new HashMap<String, Integer>();
+		HttpEntity<String> request = new HttpEntity<String>(getAuthorisationHeaderForBasicAuthentication());
 
 		uriVariables.put("id", provinceId);
-		ProvinceBO provinceBO = new RestTemplate().getForObject(urlRestServiceGeographyApplication + "/province/{id}",
-				ProvinceBO.class, uriVariables);
+		ResponseEntity<ProvinceBO> response = new RestTemplate().exchange(
+				urlRestServiceGeographyApplication + "/province/{id}", HttpMethod.GET, request, ProvinceBO.class,
+				uriVariables);
+		ProvinceBO provinceBO = response.getBody();
 		return provinceBO;
 	}
 
 	private CityBO getCity(int cityId) {
 		// local variables
 		Map<String, Integer> uriVariables = new HashMap<String, Integer>();
+		HttpEntity<String> request = new HttpEntity<String>(getAuthorisationHeaderForBasicAuthentication());
 
 		uriVariables.put("id", cityId);
-		CityBO cityBO = new RestTemplate().getForObject(urlRestServiceGeographyApplication + "/city/{id}", CityBO.class,
-				uriVariables);
+		ResponseEntity<CityBO> response = new RestTemplate().exchange(urlRestServiceGeographyApplication + "/city/{id}",
+				HttpMethod.GET, request, CityBO.class, uriVariables);
+		CityBO cityBO = response.getBody();
 		return cityBO;
+	}
+
+	private HttpHeaders getAuthorisationHeaderForBasicAuthentication() {
+		// local variables
+		HttpHeaders headers = null;
+
+		headers = new HttpHeaders();
+		headers.add("Authorization", "Basic " + new String(Base64Utils.encode(
+				(usernameRestServiceGeographyApplication + ":" + passwordRestServiceGeographyApplication).getBytes())));
+		return headers;
 	}
 }

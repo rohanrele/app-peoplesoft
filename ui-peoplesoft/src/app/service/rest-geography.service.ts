@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { Country } from '../bo/country';
 import { Province } from '../bo/province';
 import { City } from '../bo/city';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Injectable({
@@ -14,14 +14,22 @@ export class RestGeographyService {
   constructor(private httpClient: HttpClient) { }
 
   getAllCountries():Observable<Country[]>{
-    return this.httpClient.get<Country[]>('http://localhost:8080/country');
+    return this.httpClient.get<Country[]>('http://localhost:8080/country', {headers : this.getAuthorisationHeaderForBasicAuthentication()});
   }
 
   getProvincesByCountryId(countryId:number):Observable<Province[]>{
-    return this.httpClient.get<Province[]>(`http://localhost:8080/country/${countryId}/province`);
+    return this.httpClient.get<Province[]>(`http://localhost:8080/country/${countryId}/province`, {headers : this.getAuthorisationHeaderForBasicAuthentication()});
   }
 
   getCitiesByProvinceId(provinceId:number):Observable<City[]>{
-    return this.httpClient.get<City[]>(`http://localhost:8080/province/${provinceId}/city`);
+    return this.httpClient.get<City[]>(`http://localhost:8080/province/${provinceId}/city`, {headers : this.getAuthorisationHeaderForBasicAuthentication()});
+  }
+
+  getAuthorisationHeaderForBasicAuthentication():HttpHeaders{
+    let username = 'appuser1';
+    let password = 'appuser1password'
+    let headerValue = 'Basic ' + window.btoa(username + ':' + password);
+    
+    return new HttpHeaders({Authorization: headerValue});
   }
 }

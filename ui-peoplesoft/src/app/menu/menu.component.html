@@ -1,13 +1,13 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <ul class="navbar-nav">
-            <li><a *ngIf="authenticateService.isAuthenticated()" class="nav-link" routerLink="/welcome">Home</a></li>
-            <li><a *ngIf="authenticateService.isAuthenticated()" class="nav-link" routerLink="/listEmployees">Employees List</a></li>
+            <li><a *ngIf="basicAuthenticateService.isAuthenticated()" class="nav-link" routerLink="/welcome">Home</a></li>
+            <li><a *ngIf="basicAuthenticateService.isAuthenticated()" class="nav-link" routerLink="/listEmployees">Employees List</a></li>
         </ul>
         <ul class="navbar-nav navbar-collapse justify-content-end">
-            <li><a *ngIf="!authenticateService.isAuthenticated()" class="nav-link" routerLink="/login">Login</a></li>
-            <li><div *ngIf="authenticateService.isAuthenticated()" class="nav-link">Logged in as {{authenticateService.getAuthenticatedUsername()}}</div></li>
-            <li><a *ngIf="authenticateService.isAuthenticated()" class="nav-link" routerLink="/logout">Logout</a></li>
+            <li><a *ngIf="!basicAuthenticateService.isAuthenticated()" class="nav-link" routerLink="/login">Login</a></li>
+            <li><div *ngIf="basicAuthenticateService.isAuthenticated()" class="nav-link">Logged in as {{basicAuthenticateService.getAuthenticatedUsername()}}</div></li>
+            <li><a *ngIf="basicAuthenticateService.isAuthenticated()" class="nav-link" routerLink="/logout">Logout</a></li>
         </ul>
     </nav>
 </header>
