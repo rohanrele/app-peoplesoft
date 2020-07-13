@@ -19,11 +19,11 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate(): void{
-    if(this.basicAuthenticationService.authenticate(this.username, this.password)){
+    this.basicAuthenticationService.authenticate(this.username, this.password).subscribe(response => {
       this.isAuthenticated = true;
       this.router.navigate(['welcome']);
-    }else{
+    }, error => {
       this.isAuthenticated = false;
-    }
+    });
   }
 }
