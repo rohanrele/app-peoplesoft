@@ -6,7 +6,7 @@
         </ul>
         <ul class="navbar-nav navbar-collapse justify-content-end">
             <li><a *ngIf="!basicAuthenticateService.isAuthenticated()" class="nav-link" routerLink="/login">Login</a></li>
-            <li><div *ngIf="basicAuthenticateService.isAuthenticated()" class="nav-link">Logged in as {{basicAuthenticateService.getAuthenticatedUsername()}}</div></li>
+            <li><div *ngIf="basicAuthenticateService.isAuthenticated()" class="nav-link">Logged in as {{basicAuthenticateService.getAuthenticatedUsername()}} [{{basicAuthenticateService.getAuthenticatedRoles()}}]</div></li>
             <li><a *ngIf="basicAuthenticateService.isAuthenticated()" class="nav-link" routerLink="/logout">Logout</a></li>
         </ul>
     </nav>

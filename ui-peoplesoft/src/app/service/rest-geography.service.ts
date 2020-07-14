@@ -26,8 +26,8 @@ export class RestGeographyService {
   }
 
   getAuthorisationHeaderForBasicAuthentication():HttpHeaders{
-    let username = 'appuser1';
-    let password = 'appuser1password'
+    let username = 'rsguser1';
+    let password = 'rsguser1password'
     let headerValue = 'Basic ' + window.btoa(username + ':' + password);
     
     return new HttpHeaders({Authorization: headerValue});

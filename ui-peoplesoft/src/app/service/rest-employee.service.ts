@@ -23,8 +23,8 @@ export class RestEmployeeService {
   }
 
   getAuthorisationHeaderForBasicAuthentication():HttpHeaders{
-    let username = 'appuser1';
-    let password = 'appuser1password'
+    let username = 'rseuser1';
+    let password = 'rseuser1password'
     let headerValue = 'Basic ' + window.btoa(username + ':' + password);
     
     return new HttpHeaders({Authorization: headerValue});
