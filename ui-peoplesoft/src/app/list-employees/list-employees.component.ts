@@ -40,21 +40,21 @@ export class ListEmployeesComponent implements OnInit {
       response => this.handleSuccessGetAllEmployees(response),
       error => this.handleErrorGetAllEmployees(error)
     );
-    this.infoMessage = "Loading...";
+    this.infoMessage = 'Loading...';
   }
 
-  handleSuccessGetAllEmployees(response:Employee[]):void{
+  handleSuccessGetAllEmployees(response:Employee[]): void{
     this.employees = response;
-    if(this.employees == null || this.employees.length == 0){
-      this.infoMessage = "No data."
+    if(this.employees === null || this.employees.length === 0){
+      this.infoMessage = 'No data.';
     }
   }
 
-  handleErrorGetAllEmployees(error:any):void{
-    this.infoMessage = "Some error has occured.";
+  handleErrorGetAllEmployees(error:any): void{
+    this.infoMessage = 'Some error has occured.';
   }
 
-  updateEmployee(employeeId:number):void{
+  updateEmployee(employeeId:number): void{
     this.router.navigate(['updateEmployee', employeeId]);
   }
 }

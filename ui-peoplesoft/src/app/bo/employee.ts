@@ -9,7 +9,7 @@ export class Employee {
       public provinceName: string,
       public provinceId: number,
       public cityName: string,
-      public cityId:number
+      public cityId: number
       ) {
     }
   }
