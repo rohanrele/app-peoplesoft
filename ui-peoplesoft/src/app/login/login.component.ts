@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BasicAuthenticationService } from '../service/basic-authentication.service';
+import { User } from '../bo/user';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +9,7 @@ import { BasicAuthenticationService } from '../service/basic-authentication.serv
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username = 'appuser1';
-  password = 'appuser1password';
+  user = new User('appuser1', 'appuser1password', null);
   errorMessage = 'Username and/or Password incorrect!';
   isAuthenticated = true;
 
@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   }
 
   authenticate(): void{
-    this.basicAuthenticationService.authenticate(this.username, this.password).subscribe(response => {
+    this.basicAuthenticationService.authenticate(this.user).subscribe(response => {
       this.isAuthenticated = true;
       this.router.navigate(['welcome']);
     }, error => {

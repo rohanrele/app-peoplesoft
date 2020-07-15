@@ -9,26 +9,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./list-employees.component.css']
 })
 export class ListEmployeesComponent implements OnInit {
-  // employees = [
-  //   new Employee(
-  //     1,
-  //     'Rohan',
-  //     'Rele',
-  //     'rohanrele@gmail.com',
-  //     'Canada',
-  //     'British Columbia',
-  //     'Victoria'
-  //   ),
-  //   new Employee(
-  //     2,
-  //     'Shanaaya',
-  //     'Rele',
-  //     'shanaayarele@gmail.com',
-  //     'Canada',
-  //     'Ontario',
-  //     'Toronto'
-  //   )
-  // ];
 
   employees = null;
   infoMessage = null;

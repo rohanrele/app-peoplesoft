@@ -3,8 +3,8 @@
 <div class="container">
     <div class="alert alert-warning" *ngIf="!isAuthenticated">{{errorMessage}}</div>
     <div>
-        Username: <input type="text" name="username" [(ngModel)]="username">
-        Password: <input type="password" name="password" [(ngModel)]="password">
+        Username: <input type="text" [(ngModel)]="user.username">
+        Password: <input type="password" [(ngModel)]="user.password">
         <button class="btn btn-success" (click)="authenticate()">Login</button>
     </div>
 </div>

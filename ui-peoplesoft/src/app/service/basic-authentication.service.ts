@@ -11,10 +11,11 @@ export class BasicAuthenticationService {
 
   constructor(private httpClient: HttpClient) { }
 
-  authenticate(username: string, password: string):Observable<boolean>{
-    return this.httpClient.get<User>('http://localhost:8082/basic-authenticate', { headers: this.getAuthorisationHeaderForBasicAuthentication(username, password) }).pipe(map(response => {
-      sessionStorage.setItem('authenticatedUsername', response.username);
-      sessionStorage.setItem('authenticatedRoles', response.roles.toString());
+  authenticate(user:User):Observable<boolean>{
+    return this.httpClient.get<User>('http://localhost:8082/basic-authenticate', { headers: this.getAuthorisationHeaderForBasicAuthentication(user.username, user.password) }).pipe(map(response => {
+      let user = response;
+      sessionStorage.setItem('authenticatedUsername', user.username);
+      sessionStorage.setItem('authenticatedRoles', user.roles.toString());
       return true;
     }));
   }
@@ -26,6 +27,8 @@ export class BasicAuthenticationService {
 
   logout(): void {
     sessionStorage.removeItem('authenticatedUsername');
+    sessionStorage.removeItem('authenticatedRoles');
+
   }
 
   getAuthenticatedUsername(): string {
