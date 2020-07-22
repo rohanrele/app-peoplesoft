@@ -34,18 +34,20 @@ public class DbDataPopulateCLRunner implements CommandLineRunner {
 			// local variables
 			List<User> users = null;
 			User user = null;
-			List<Role> roles = null;
 			Role role1 = null;
 			Role role2 = null;
 
+			// save associate role
 			role1 = new Role();
 			role1.setName("ASSOCIATE");
 			role1 = roleRepository.save(role1);
 
+			// save manager role
 			role2 = new Role();
 			role2.setName("MANAGER");
 			role2 = roleRepository.save(role2);
 
+			// populate user with roles
 			users = new ArrayList<User>();
 			user = new User();
 			user.setUsername("appuser1");
@@ -58,7 +60,7 @@ public class DbDataPopulateCLRunner implements CommandLineRunner {
 			user.getRoles().add(role2);
 			users.add(user);
 
-			// save to db
+			// save users with roles to db
 			userRepository.saveAll(users);
 		} else { // else update tuples
 
